@@ -1,0 +1,58 @@
+<project xmlns:ivy='antlib:org.apache.ivy.ant' name='ClassmateGUI' basedir='.' 
+	default='run'>
+	<description>
+		Builds the GUI for the 2018 Team 871 Classmate test station.
+	</description>
+
+	<property name='SRCDIR' location='src' />
+	<property name='BINDIR' location='bin' />
+	<property name='LIBDIR' location='lib' />
+	<property name='CACHE' location='cache' />
+
+	<path id='classpath'>
+		<fileset dir='${LIBDIR}'>
+			<include name='**/*.jar' />
+		</fileset>
+	</path>
+
+	<target name='init' description='Creates any necessary directories'>
+		<mkdir dir='${BINDIR}' />
+		<mkdir dir='${CACHE}' />
+	</target>
+
+	<target name='compile' description='Compile all files' depends='init'>
+		<depend srcdir='${SRCDIR}' destdir='${BINDIR}' cache='${CACHE}' />
+		<javac srcdir='${SRCDIR}' destdir='${BINDIR}' classpathref='classpath'
+			includeAntRuntime='false' debug='true'>
+			<compilerarg value='-Xdiags:verbose' />
+		</javac>
+	</target>
+
+	<target name='jar' description='Package the classes' depends='compile'>
+		<manifestclasspath property='CLASSPATH'
+			jarfile='${basedir}/${ant.project.name}.jar'>
+			<classpath refid='classpath' />
+		</manifestclasspath>
+
+		<manifest file='${SRCDIR}/MANIFEST.MF'>
+			<attribute name='Main-Class' value='classmate.main.Main' />
+			<attribute name='Class-Path' value='${CLASSPATH}' />
+		</manifest>
+
+		<jar destfile='${basedir}/${ant.project.name}.jar' basedir='${BINDIR}'
+			manifest='${SRCDIR}/MANIFEST.MF'>
+			<fileset dir='${basedir}' includes='res/**' />
+		</jar>
+	</target>
+
+	<target name='run' description='Run the jar' depends='jar'>
+		<java fork='true' spawn='true'
+			jar='${basedir}/${ant.project.name}.jar' />
+	</target>
+
+	<target name='clean' description='Remove the cache and all class files'>
+		<delete includeemptydirs='true' dir='${BINDIR}' />
+		<delete includeemptydirs='true' dir='${CACHE}' />
+	</target>
+
+</project>

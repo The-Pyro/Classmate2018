@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import classmate.gui.Controller?>
+
+<BorderPane fx:id='rootNode' fx:controller='classmate.gui.GUI'
+	xmlns:fx='http://javafx.com/fxml' style='-fx-padding: 10;'>
+	<center>
+		<HBox spacing='15' fillHeight='false' alignment='TOP_CENTER'>
+			<children>
+				<Pane style='-fx-border-color: black; -fx-border-width: 4;'>
+					<Controller fx:id='blackMotor' />
+				</Pane>
+
+				<Pane style='-fx-border-color: red; -fx-border-width: 4;'>
+					<Controller fx:id='redMotor' />
+				</Pane>
+
+				<Pane style='-fx-border-color: blue; -fx-border-width: 4;'>
+					<VBox spacing='4' style='-fx-padding: 10;'
+						alignment='CENTER'>
+						<Label text='Select Relay Mode:' />
+						<ChoiceBox fx:id='relay' onAction='#updateRelay'>
+							<items>
+								<FXCollections fx:factory='observableArrayList'>
+									<String fx:value='Off' />
+									<String fx:value='Forward' />
+									<String fx:value='Reverse' />
+								</FXCollections>
+							</items>
+						</ChoiceBox>
+					</VBox>
+				</Pane>
+			</children>
+		</HBox>
+	</center>
+
+	<bottom>
+		<VBox alignment='BOTTOM_CENTER'>
+			<HBox fx:id='dioBox' spacing='4' alignment='CENTER'>
+				<children>
+					<Label text='Digital Input States:' />
+				</children>
+			</HBox>
+			<HBox fx:id='analogBox' spacing='4' alignment='CENTER'>
+				<children>
+					<Label text='Analog Input Values:' />
+				</children>
+			</HBox>
+		</VBox>
+	</bottom>
+</BorderPane>

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root type='javafx.scene.layout.VBox' xmlns:fx='http://javafx.com/fxml'
+	spacing='20' alignment='TOP_CENTER' style='-fx-padding: 4'>
+	<children>
+		<Label fx:id='speed' text='Speed!' style='-fx-font-size: 46'/>
+
+		<fx:define>
+			<ToggleGroup fx:id='controllerGroup' />
+		</fx:define>
+		<VBox spacing='4' alignment='CENTER' fillWidth='false'>
+			<Label text='Select Controlling Joystick:' />
+			<VBox fillWidth='false' >
+				<RadioButton fx:id='none' text='None' userData='-1'
+					selected='true' toggleGroup='$controllerGroup'
+					onAction='#updateConfig' />
+				<RadioButton fx:id='cont0' text='Joystick 0' userData='0'
+					toggleGroup='$controllerGroup' onAction='#updateConfig' />
+				<RadioButton fx:id='cont1' text='Joystick 1' userData='1'
+					toggleGroup='$controllerGroup' onAction='#updateConfig' />
+				<RadioButton fx:id='analog' text='Analog 0' userData='2'
+					toggleGroup='$controllerGroup' onAction='#updateConfig' />
+			</VBox>
+		</VBox>
+
+		<ToggleButton fx:id='invert' text='Invert?' onAction='#updateConfig' />
+	</children>
+</fx:root>

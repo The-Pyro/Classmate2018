@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.9.9
+Created-By: 1.8.0_131-b11 (Oracle Corporation)
+Main-Class: classmate.main.Main
+Class-Path: lib/ntcore-java-4.0.0.jar lib/ntcore-jni-4.0.0-all.jar lib
+ /wpiutil-java-3.0.0.jar
+
